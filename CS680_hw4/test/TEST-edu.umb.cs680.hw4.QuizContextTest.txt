@@ -1,0 +1,10 @@
+Testcase: edu.umb.cs680.hw4.QuizContextTest
+Test: Test_QuizNotStarted_Singleton() took 23 milli sec(s)
+Test: TestCase_GiveQuizInprogress_when_QuizIsStarted_ThenQuizResultsState() took 4 milli sec(s)
+Test: TestCase_TrySubmitTheQuiz_BeforeStarted() took 0 milli sec(s)
+Tests run: 3, Failures: 0, Skipped: 0, Aborted: 0, Time elapsed: 65 milli sec(s)
+------------- Standard Output ---------------
+Quiz started..
+Completed answering the questions
+You cannot submit the Quiz, without starting
+------------- ---------------- ---------------
