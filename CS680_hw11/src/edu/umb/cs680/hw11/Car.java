@@ -41,24 +41,40 @@ public class Car {
    }
 
 //   Do Normalization
-    public List<Double> Normalization(List<Double> values){
+    public static List<List<Double>> Normalization(List<List<Double>> values){
 //       Get the min & max values using Collections
-        double max = Double.MIN_VALUE;
-        double min = Double.MAX_VALUE;
-        for(Double val : values){
-            if(val < min){
-                min = val;
-            }
-            if (val > max){
-                max = val;
-            }
+        List<Double> prices = new ArrayList<>();
+        List<Double> Mileages = new ArrayList<>();
+        List<Double> Years = new ArrayList<>();
+        for(List<Double> val : values){
+          prices.add(val.get(0));
+          Mileages.add(val.get(1));
+          Years.add(val.get(2));
         }
+//        Sort the list min and max using collections.
+        Collections.sort(prices);
+        Collections.sort(Mileages);
+        Collections.sort(Years);
+//        Getting min and max values using index
+        double piceMin = prices.get(0);
+        double priceMax = prices.get(prices.size() -1);
+        double mileageMin = Mileages.get(0);
+        double mIleageMax = Mileages.get(Mileages.size() -1);
+        double YearMin = Years.get(0);
+        double YearMax = Years.get(Years.size() -1);
 
 //        Adding normalized values in to a new ArrayList
-        List<Double> normValues = new ArrayList<>();
-        for (Double Xvalue : values){
-            double normalization = (Xvalue - min) / (max - min) ;
-            normValues.add(normalization);
+        List<List<Double>> normValues = new ArrayList<>();
+        for (List<Double> val : values){
+            double price = val.get(0);
+            double Mileage = val.get(1);
+            double Year = val.get(2);
+
+            double PNorm = (price - piceMin) / (priceMax - piceMin);
+            double MNorm = (Mileage - mileageMin) / (mIleageMax - mileageMin);
+            double YNorm = (Year - YearMin) / (YearMax - YearMin);
+            List<Double> normalizedCarValues = Arrays.asList(PNorm, MNorm, YNorm);
+            normValues.add(normalizedCarValues);
         }
         return normValues;
 
@@ -75,48 +91,18 @@ public class Car {
         cars.add(car1);
         cars.add(car2);
         cars.add(car3);
-        for(Car car: cars){
-            List<Double> carValues = car.getCarValuesAsList();
-            System.out.println(carValues);
-        }
         List<List<Double>> carValues = new ArrayList<>();
-        carValues.add(car1.getCarValuesAsList());
-        carValues.add(car2.getCarValuesAsList());
-        carValues.add(car3.getCarValuesAsList());
-        System.out.println(Distance.matrix(carValues, new Euclidean()));
-        System.out.println(Distance.get(car1.getCarValuesAsList() ,car2.getCarValuesAsList(),new Manhattan()));
-        System.out.println(Distance.get(car1.getCarValuesAsList(), car2.getCarValuesAsList(), new Cosine()));
-        System.out.println(Distance.get(car1.getCarValuesAsList(), car2.getCarValuesAsList()));
-
-
-        System.out.println(" ");
-
         for(Car car: cars){
-            List<Double> normCarValues = car.Normalization(car.getCarValuesAsList());
-            System.out.println(normCarValues);
+           carValues.add(car.getCarValuesAsList());
         }
-//        TO get values in matric , creating List<List<Double>> new ArrayList , that will have normalized values of price, year, mileage in a matrix form.
+        System.out.println(carValues);
 
-        List<List<Double>> points = new ArrayList<>();
-        for (Car car : cars){
-            points.add(car.Normalization(car.getCarValuesAsList()));
-        }
-        System.out.println(Distance.matrix(points,new Euclidean()));
+        System.out.println(Distance.get(car1.getCarValuesAsList(), car2.getCarValuesAsList(), new Euclidean()));
+        System.out.println(Distance.get(car1.getCarValuesAsList(), car2.getCarValuesAsList(), new Manhattan()));
+        System.out.println(Distance.get(car1.getCarValuesAsList(), car2.getCarValuesAsList(), new Cosine()));
+//        Distance matrix with normalized values
 
-//        points.add(car1.Normalization(car1.getCarValuesAsList()));
-//        points.add(car2.Normalization(car2.getCarValuesAsList()));
-//        points.add(car3.Normalization(car3.getCarValuesAsList()));
-//        System.out.println(Distance.matrix(points, new Cosine()));
-//        System.out.println(Distance.matrix(points, new Manhattan()));
-//        System.out.println(Distance.matrix(points, new Euclidean()));
-//
-//             System.out.println("manufractured by "+ c.getMake());
-//        System.out.println("mdoel of the car is " + c.getModel());
-//        System.out.println("the mileage of the car is "+ c.getMileage());
-//        System.out.println("Manufractured in the year " + c.getYear());
-//        System.out.println("The price of the car is " + c.getPrice());
-
+        List<List<Double>> normValues = Car.Normalization(carValues);
+        System.out.println(Distance.matrix(normValues, new Euclidean()));
     }
-
-
 }

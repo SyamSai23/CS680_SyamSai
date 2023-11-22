@@ -16,32 +16,30 @@ class EuclideanTest {
 //      Running Distance matrix for 1000 random cars
         List<Car> cars = new ArrayList<>();
         Random rand = new Random();
+        List<List<Double>> carvalues = new ArrayList<>();
         for(int i=0; i<1000;i++){
 //            Getting price range between 10000 and 100000
             int price = rand.nextInt(100000 - 10000) + 10000;
             int mileage = rand.nextInt(5000 - 1000) + 1000;
             int Year = rand.nextInt(2020 - 2010) + 2010;
             Car car = new Car("","", mileage, price,Year);
-            car.getCarValuesAsList();
-            cars.add(car);
+//            cars.add(car);
+            carvalues.add(car.getCarValuesAsList());
         }
 //        normalizing the values
-        List<List<Double>> points = new ArrayList<>();
-        for (Car car : cars){
-            points.add(car.Normalization(car.getCarValuesAsList()));
-        }
-        System.out.println(Distance.matrix(points,new Euclidean()));
-//        Checking if the expected matrix size and actual matrix are same
-        assertEquals(1000, Distance.matrix(points).size());
-//         Checking if the all the values are in the range[0,1]
-        List<List<Double>> euclideanMatrix = Distance.matrix(points, new Euclidean());
-        for(List<Double> row : euclideanMatrix){
+        List<List<Double>> points = Car.Normalization(carvalues);
+        for(List<Double> row : points){
             for(Double values: row){
-                values = Math.min(1.0, Math.max(0.0, values));
                 assertTrue(values >= 0.0 && values <=1.0);
             }
         }
 
+//        Checking if the expected matrix size and actual matrix are same
+        assertEquals(1000, Distance.matrix(points).size());
+//         Checking if the all the values are in the range[0,1]
+        List<List<Double>> euclideanMatrix = Distance.matrix(points, new Euclidean());
+
+        System.out.println(euclideanMatrix);
     }
 
     @Test
@@ -59,27 +57,38 @@ class EuclideanTest {
         assertEquals(expected, (Distance.get(cars.get(1).getCarValuesAsList(), cars.get(2).getCarValuesAsList(), new Euclidean())));
     }
     @Test
-    public void TestNormalization(){
+    public void TestNormalizedValuesEucliedean(){
 //     Checking NNormalization values.
         ArrayList<Car> cars = TestFixtures.getCars();
-        List<Double> expectedValues = Arrays.asList(1.0,0.055342308794041825,0.0);
-        assertEquals(expectedValues, cars.get(3).Normalization(cars.get(3).getCarValuesAsList()));
+        List<List<Double>> carValues = new ArrayList<>();
+        for(Car car: cars){
+            carValues.add(car.getCarValuesAsList());
+        }
+        List<List<Double>> normValues = Car.Normalization(carValues);
+        List<List<Double>> expectedNormValues = Arrays.asList(
+                Arrays.asList(0.52, 1.0, 0.39285714285714285),
+                Arrays.asList(0.56, 0.8125, 0.0),
+                Arrays.asList(0.0, 0.0, 0.19642857142857142),
+                Arrays.asList(1.0, 1.0, 1.0)
+        );
+        assertEquals(expectedNormValues, normValues);
     }
 
     @Test
     public void TestDistanceMatrixValuesEuclidean(){
         List<Car> cars = TestFixtures.getCars();
-        List<List<Double>> points = new ArrayList<>();
-        for (Car car : cars){
-            points.add(car.Normalization(car.getCarValuesAsList()));
+        List<List<Double>> CarValues = new ArrayList<>();
+        for(Car car: cars){
+            CarValues.add(car.getCarValuesAsList());
         }
+        List<List<Double>> normValues = Car.Normalization(CarValues);
         List<List<Double>> expecetdMatrix = Arrays.asList(
-                Arrays.asList(0.0, 0.002861220119949104, 0.11129954915670028, 0.030344581024647155),
-                Arrays.asList(0.002861220119949104, 0.0, 0.11416076927664938, 0.02748336090469805),
-                Arrays.asList(0.11129954915670028, 0.11416076927664938, 0.0, 0.14164413018134742),
-                Arrays.asList(0.030344581024647155, 0.02748336090469805, 0.14164413018134742, 0.0)
+                Arrays.asList(0.0, 0.43714183589983413, 1.144108466743197, 0.7739654055444545),
+                Arrays.asList(0.43714183589983413, 0.0, 1.0061512976056184, 1.1084927830166509),
+                Arrays.asList(1.144108466743197, 1.0061512976056184, 0.0, 1.6265691011501253),
+                Arrays.asList(0.7739654055444545, 1.1084927830166509, 1.6265691011501253, 0.0)
         );
-        assertEquals(expecetdMatrix, (Distance.matrix(points, new Euclidean())));
+        assertEquals(expecetdMatrix, (Distance.matrix(normValues, new Euclidean())));
 
     }
 

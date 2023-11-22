@@ -15,31 +15,31 @@ class ManhattanTest {
 
         List<Car> cars = new ArrayList<>();
         Random rand = new Random();
+        List<List<Double>> CarValues = new ArrayList<>();
         for(int i=0; i<1000;i++){
 //            Getting price range between 10000 and 100000
             int price = rand.nextInt(100000 - 10000) + 10000;
             int mileage = rand.nextInt(5000 - 1000) + 1000;
             int Year = rand.nextInt(2020 - 2010) + 2010;
             Car car = new Car("","", mileage, price,Year);
-            car.getCarValuesAsList();
             cars.add(car);
+            CarValues.add(car.getCarValuesAsList());
         }
 //        normalizing the values
-        List<List<Double>> points = new ArrayList<>();
-        for (Car car : cars){
-            points.add(car.Normalization(car.getCarValuesAsList()));
+        List<List<Double>> points = Car.Normalization(CarValues);
+        for(List<Double> row : points){
+            for(Double values: row){
+                assertTrue(values >= 0.0 && values <=1.0);
+            }
         }
-        System.out.println(Distance.matrix(points,new Manhattan()));
+
+//        System.out.println(Distance.matrix(points,new Manhattan()));
 //        Checking if the expected matrix size and actual matrix are same
         assertEquals(1000, Distance.matrix(points).size());
 //         Checking if the all the values are in the range[0,1]
         List<List<Double>> ManhattanMatrix = Distance.matrix(points, new Manhattan());
-        for(List<Double> row : ManhattanMatrix){
-            for(Double values: row){
-                values = Math.min(1.0, Math.max(0.0, values));
-                assertTrue(values >= 0.0 && values <=1.0);
-            }
-        }
+
+        System.out.println(ManhattanMatrix);
     }
 
     @Test
@@ -49,22 +49,23 @@ class ManhattanTest {
         assertEquals(expectedCValue, (Distance.get(cars.get(0).getCarValuesAsList(), cars.get(1).getCarValuesAsList(), new Manhattan())));
     }
 
+
+
     @Test
     public void TestDistanceMatrixManhattan(){
         List<Car> cars = TestFixtures.getCars();
-        List<List<Double>> points = new ArrayList<>();
-        for (Car car : cars){
-            points.add(car.Normalization(car.getCarValuesAsList()));
+        List<List<Double>> CarValues = new ArrayList<>();
+        for(Car car: cars){
+            CarValues.add(car.getCarValuesAsList());
         }
-        System.out.println(Distance.matrix(points, new Manhattan()));
-        List<List<Double>> expectedMatrix = Arrays.asList(
-                Arrays.asList(0.0, 0.002861220119949104, 0.11129954915670028, 0.030344581024647155),
-                Arrays.asList(0.002861220119949104, 0.0, 0.11416076927664938, 0.02748336090469805),
-                Arrays.asList(0.11129954915670028, 0.11416076927664938, 0.0, 0.14164413018134742),
-                Arrays.asList(0.030344581024647155, 0.02748336090469805, 0.14164413018134742, 0.0)
+        List<List<Double>> normValues = Car.Normalization(CarValues);
+        List<List<Double>> expecetdMatrix = Arrays.asList(
+                Arrays.asList(0.0, 0.6203571428571428, 1.7164285714285714, 1.0871428571428572),
+                Arrays.asList(0.6203571428571428, 0.0, 1.5689285714285715, 1.6275),
+                Arrays.asList(1.7164285714285714, 1.5689285714285715, 0.0, 2.803571428571429),
+                Arrays.asList(1.0871428571428572, 1.6275, 2.803571428571429, 0.0)
         );
-        assertEquals(expectedMatrix, (Distance.matrix(points, new Manhattan())));
-
+        assertEquals(expecetdMatrix, (Distance.matrix(normValues, new Manhattan())));
 
     }
 
