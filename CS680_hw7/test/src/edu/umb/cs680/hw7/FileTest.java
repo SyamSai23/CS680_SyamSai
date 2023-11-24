@@ -1,7 +1,6 @@
 package edu.umb.cs680.hw7;
 
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
 
 import org.junit.jupiter.api.Test;
 
@@ -9,22 +8,15 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 
+import static edu.umb.cs680.hw7.TestFixtureInitializer.date2;
 import static org.junit.jupiter.api.Assertions.*;
 
 class FileTest {
 
-    static LocalDateTime date1 = LocalDateTime.now();
-    static Directory root = new Directory(null,"Root",0,date1);
-    static Directory src = new Directory(root,"src",0,date1);
-    static Directory test = new Directory(root,"test",0,date1);
-    static File xml = new File(root,"xml",5,date1);
-    static File ivy = new File(root,"ivy",6,date1);
-    static File java1 = new File(src,"HelloWorld.java",4,date1);
-    static File java2 = new File(test,"TestHelloWorld.java",5,date1);
-
+    private static FileSystem fs;
     @BeforeAll
     public static void setUpFS(){
-        FileSystem instance = TestFixtureInitializer.createFS();
+         fs = TestFixtureInitializer.createFS();
 
     }
 
@@ -36,15 +28,28 @@ class FileTest {
 
     @Test
     public void FileEqualityJava1(){
-        String[] expected = {"src", "HelloWorld.java", "4", String.valueOf(date1)};
-        File actual = java1;
-        assertArrayEquals(expected, FileToStringArray(actual));
+        File java1 = TestFixtureInitializer.java1;
+        String[] expected = {"src", "HelloWorld", "4", String.valueOf(date2)};
+        assertArrayEquals(expected, FileToStringArray(java1));
     }
 
+    @Test
+    public void FileEqualityXml(){
+        File xml = TestFixtureInitializer.xml;
+        String[] expected = {"root", "xml", "3", String.valueOf(date2)};
+        assertArrayEquals(expected, FileToStringArray(xml));
+    }
 
+    @Test
+    public void FileEqualityIvy(){
+        File ivy = TestFixtureInitializer.ivy;
+        String[] expected = {"root", "ivy", "4", String.valueOf(date2)};
+        assertArrayEquals(expected, FileToStringArray(ivy));
+    }
 
     @Test
     public void TestIsDirectoryReturnsFalse(){
+        File java1 = TestFixtureInitializer.java1;
         assertFalse(java1.isDirectory());
     }
 

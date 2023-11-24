@@ -25,6 +25,7 @@ public class Directory extends FSElement {
     public LinkedList<Directory> getSubDirectories(){
 //        Here we have used Enhanced ForLoop, Get all the childrens from the
 //        FSElement and check whether node is directory or not .
+        SubDirectories.clear();
         for(FSElement Node : this.Children){
             if(Node.isDirectory()){
                 SubDirectories.add((Directory) Node);
@@ -35,6 +36,7 @@ public class Directory extends FSElement {
     LinkedList<File> Files = new LinkedList<File>();
     public  LinkedList<File> getFiles()
     {
+        Files.clear();
         for(FSElement Node :this.Children){
             if(!Node.isDirectory()){
                 Files.add((File) Node);

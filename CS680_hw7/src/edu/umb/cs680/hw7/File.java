@@ -8,10 +8,7 @@ public class File extends FSElement {
         if(this.parent != null){
             parent.appendChild(this);
         }
-        }
-
-
-
+    }
     @Override
     public boolean isDirectory() {
         return false;
