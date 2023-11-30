@@ -14,18 +14,18 @@ class CosineTest {
     public void TestCosineDistanceMatrixWith1000Cars(){
         List<Car> cars = new ArrayList<>();
         Random rand = new Random();
-        List<List<Double>> CarValues = new ArrayList<>();
+        List<List<Double>> carValues = new ArrayList<>();
         for(int i=0; i<1000;i++){
 //            Getting price range between 10000 and 100000
             int price = rand.nextInt(100000 - 10000) + 10000;
             int mileage = rand.nextInt(5000 - 1000) + 1000;
-            int Year = rand.nextInt(2020 - 2010) + 2010;
-            Car car = new Car("","", mileage, price,Year);
+            int year = rand.nextInt(2020 - 2010) + 2010;
+            Car car = new Car("","", mileage, price,year);
             cars.add(car);
-            CarValues.add(car.getCarValuesAsList());
+            carValues.add(car.getCarValuesAsList());
         }
 //        normalizing the values
-        List<List<Double>> points = Car.Normalization(CarValues);
+        List<List<Double>> points = Car.Normalization(carValues);
         for(List<Double> row : points){
             for(Double values: row){
                 assertTrue(values >= 0.0 && values <=1.0);
@@ -36,8 +36,8 @@ class CosineTest {
 //        Checking if the expected matrix size and actual matrix are same
         assertEquals(1000, Distance.matrix(points).size());
 //         Checking if the all the values are in the range[0,1]
-        List<List<Double>> ManhattanMatrix = Distance.matrix(points, new Cosine());
-        System.out.println(ManhattanMatrix);
+        List<List<Double>> cosineMatrix = Distance.matrix(points, new Cosine());
+        System.out.println(cosineMatrix);
     }
 
     @Test
@@ -50,11 +50,11 @@ class CosineTest {
     @Test
     public void TestDistanceMatrixCosine(){
         List<Car> cars = TestFixtures.getCars();
-        List<List<Double>> CarValues = new ArrayList<>();
+        List<List<Double>> carValues = new ArrayList<>();
         for(Car car: cars){
-            CarValues.add(car.getCarValuesAsList());
+            carValues.add(car.getCarValuesAsList());
         }
-        List<List<Double>> normValues = Car.Normalization(CarValues);
+        List<List<Double>> normValues = Car.Normalization(carValues);
 //        System.out.println(Distance.matrix(points, new Cosine()));
         List<List<Double>> expecetdMatrix = Arrays.asList(
                 Arrays.asList(1.0, 0.9370410187024395, 0.32912990375354123, 0.9252404232446889),

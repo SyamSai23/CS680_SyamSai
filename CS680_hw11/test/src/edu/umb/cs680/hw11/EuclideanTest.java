@@ -16,18 +16,18 @@ class EuclideanTest {
 //      Running Distance matrix for 1000 random cars
         List<Car> cars = new ArrayList<>();
         Random rand = new Random();
-        List<List<Double>> carvalues = new ArrayList<>();
+        List<List<Double>> carValues = new ArrayList<>();
         for(int i=0; i<1000;i++){
 //            Getting price range between 10000 and 100000
             int price = rand.nextInt(100000 - 10000) + 10000;
             int mileage = rand.nextInt(5000 - 1000) + 1000;
-            int Year = rand.nextInt(2020 - 2010) + 2010;
-            Car car = new Car("","", mileage, price,Year);
+            int year = rand.nextInt(2020 - 2010) + 2010;
+            Car car = new Car("","", mileage, price,year);
 //            cars.add(car);
-            carvalues.add(car.getCarValuesAsList());
+            carValues.add(car.getCarValuesAsList());
         }
 //        normalizing the values
-        List<List<Double>> points = Car.Normalization(carvalues);
+        List<List<Double>> points = Car.Normalization(carValues);
         for(List<Double> row : points){
             for(Double values: row){
                 assertTrue(values >= 0.0 && values <=1.0);
@@ -77,11 +77,11 @@ class EuclideanTest {
     @Test
     public void TestDistanceMatrixValuesEuclidean(){
         List<Car> cars = TestFixtures.getCars();
-        List<List<Double>> CarValues = new ArrayList<>();
+        List<List<Double>> carValues = new ArrayList<>();
         for(Car car: cars){
-            CarValues.add(car.getCarValuesAsList());
+            carValues.add(car.getCarValuesAsList());
         }
-        List<List<Double>> normValues = Car.Normalization(CarValues);
+        List<List<Double>> normValues = Car.Normalization(carValues);
         List<List<Double>> expecetdMatrix = Arrays.asList(
                 Arrays.asList(0.0, 0.43714183589983413, 1.144108466743197, 0.7739654055444545),
                 Arrays.asList(0.43714183589983413, 0.0, 1.0061512976056184, 1.1084927830166509),

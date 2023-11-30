@@ -44,35 +44,35 @@ public class Car {
     public static List<List<Double>> Normalization(List<List<Double>> values){
 //       Get the min & max values using Collections
         List<Double> prices = new ArrayList<>();
-        List<Double> Mileages = new ArrayList<>();
-        List<Double> Years = new ArrayList<>();
+        List<Double> mileages = new ArrayList<>();
+        List<Double> years = new ArrayList<>();
         for(List<Double> val : values){
           prices.add(val.get(0));
-          Mileages.add(val.get(1));
-          Years.add(val.get(2));
+          mileages.add(val.get(1));
+          years.add(val.get(2));
         }
 //        Sort the list min and max using collections.
         Collections.sort(prices);
-        Collections.sort(Mileages);
-        Collections.sort(Years);
+        Collections.sort(mileages);
+        Collections.sort(years);
 //        Getting min and max values using index
-        double piceMin = prices.get(0);
+        double priceMin = prices.get(0);
         double priceMax = prices.get(prices.size() -1);
-        double mileageMin = Mileages.get(0);
-        double mIleageMax = Mileages.get(Mileages.size() -1);
-        double YearMin = Years.get(0);
-        double YearMax = Years.get(Years.size() -1);
+        double mileageMin = mileages.get(0);
+        double mileageMax = mileages.get(mileages.size() -1);
+        double yearMin = years.get(0);
+        double yearMax = years.get(years.size() -1);
 
 //        Adding normalized values in to a new ArrayList
         List<List<Double>> normValues = new ArrayList<>();
         for (List<Double> val : values){
             double price = val.get(0);
-            double Mileage = val.get(1);
-            double Year = val.get(2);
+            double mileage = val.get(1);
+            double year = val.get(2);
 
-            double PNorm = (price - piceMin) / (priceMax - piceMin);
-            double MNorm = (Mileage - mileageMin) / (mIleageMax - mileageMin);
-            double YNorm = (Year - YearMin) / (YearMax - YearMin);
+            double PNorm = (price - priceMin) / (priceMax - priceMin);
+            double MNorm = (mileage - mileageMin) / (mileageMax - mileageMin);
+            double YNorm = (year - yearMin) / (yearMax - yearMin);
             List<Double> normalizedCarValues = Arrays.asList(PNorm, MNorm, YNorm);
             normValues.add(normalizedCarValues);
         }
@@ -82,27 +82,5 @@ public class Car {
 
 
 
-    public static void main(String[] args){
 
-        List<Car> cars = new ArrayList<>();
-        Car car1 = new Car("Honda","civic",12,2003,10000);
-        Car car2 = new Car("Honda","Accord",11,2020,12000);
-        Car car3 = new Car("Chavalite","Tavera",23,2009,15000);
-        cars.add(car1);
-        cars.add(car2);
-        cars.add(car3);
-        List<List<Double>> carValues = new ArrayList<>();
-        for(Car car: cars){
-           carValues.add(car.getCarValuesAsList());
-        }
-        System.out.println(carValues);
-
-        System.out.println(Distance.get(car1.getCarValuesAsList(), car2.getCarValuesAsList(), new Euclidean()));
-        System.out.println(Distance.get(car1.getCarValuesAsList(), car2.getCarValuesAsList(), new Manhattan()));
-        System.out.println(Distance.get(car1.getCarValuesAsList(), car2.getCarValuesAsList(), new Cosine()));
-//        Distance matrix with normalized values
-
-        List<List<Double>> normValues = Car.Normalization(carValues);
-        System.out.println(Distance.matrix(normValues, new Euclidean()));
-    }
 }
