@@ -11,16 +11,16 @@ public class SmartWatchTrackerApp implements StepCountObserver, LocationObserver
     }
 
     @Override
-    public void updateLocationSensor(String Location) {
+    public void updateLocationSensor(LOCATIONEvent locationName) {
         reactedNotification = true;
-        System.out.println(" hey "+ name +  " Your current location is   " + Location);
+        System.out.println(" hey "+ name +  " Your current location is   " + locationName.getLocationName());
 
     }
 
     @Override
-    public void updateStepCount(int stepCount) {
+    public void updateStepCount(STEPCOUNTEvent stepCount) {
         reactedNotification = true;
-        System.out.println(" Hey " + name + " You have acheived an new goal  " + stepCount);
+        System.out.println(" Hey " + name + " You have acheived an new goal  " + stepCount.getStepCount());
     }
 
     public boolean hasReactedToStateChange(){

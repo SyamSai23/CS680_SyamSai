@@ -1,13 +1,13 @@
 package edu.umb.cs680.hw6;
 
 public class STEPCOUNTEvent {
-    private int StepCount;
+    private final int stepCount;
 
-    public STEPCOUNTEvent(int StepCount){
-        this.StepCount = StepCount;
+    public STEPCOUNTEvent(int stepCount){
+        this.stepCount = stepCount;
     }
     public int getStepCount(){
-        return StepCount;
+        return stepCount;
     }
 
 }

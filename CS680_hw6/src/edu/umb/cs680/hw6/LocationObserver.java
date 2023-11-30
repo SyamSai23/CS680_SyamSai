@@ -1,11 +1,6 @@
 package edu.umb.cs680.hw6;
 
 public interface LocationObserver {
-
-
-    public void updateLocationSensor(String LocationName);
-
-
-
+    public void updateLocationSensor(LOCATIONEvent locationName);
 
 }

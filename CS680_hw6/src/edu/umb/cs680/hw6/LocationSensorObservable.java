@@ -3,28 +3,29 @@ package edu.umb.cs680.hw6;
 import java.util.LinkedList;
 
 public class LocationSensorObservable {
-    private final LinkedList<LocationObserver> LocationSensorObservers = new java.util.LinkedList<>();
+    private final LinkedList<LocationObserver> locationSensorObservers = new LinkedList<>();
 
     public void addLocationObserver(LocationObserver o) {
-        LocationSensorObservers.add(o);
+        locationSensorObservers.add(o);
     }
 
     public void RemoveLocationObserver(LocationObserver o){
-        LocationSensorObservers.remove(o);
+        locationSensorObservers.remove(o);
     }
 
     public  int CountLocationObservers(){
-        return LocationSensorObservers.size();
+        return locationSensorObservers.size();
     }
 //    private String LocationName;
-//    public void LocationNotify(){
+//    public void notifyLocationObserver(){
 //        LOCATIONEvent L = new LOCATIONEvent(LocationName);
 //        notifyLocationObserver(L);
 //    }
 
-    public void notifyLocationObserver(String LocationName) {
-        LOCATIONEvent event = new LOCATIONEvent(LocationName);
-        LocationSensorObservers.forEach((LocationObserver)->{LocationObserver.updateLocationSensor(event.getLocationName());});
+    public void notifyLocationObserver(LOCATIONEvent event) {
+        locationSensorObservers.forEach((LocationObserver)->{LocationObserver.updateLocationSensor(event);});
 
     }
+
+
 }

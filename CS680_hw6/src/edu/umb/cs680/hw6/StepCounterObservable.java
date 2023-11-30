@@ -3,18 +3,18 @@ package edu.umb.cs680.hw6;
 import java.util.LinkedList;
 
 public class StepCounterObservable {
-    private LinkedList<StepCountObserver> StepCountObservers = new LinkedList<>();
+    private final LinkedList<StepCountObserver> stepCountObservers = new LinkedList<>();
 
     public void addStepCountObserver(StepCountObserver o) {
-        StepCountObservers.add(o);
+        stepCountObservers.add(o);
     }
 
     public void removeStepCountObserver(StepCountObserver o) {
-        StepCountObservers.remove(o);
+        stepCountObservers.remove(o);
     }
 
     public int CountStepCountObserver(){
-        return StepCountObservers.size();
+        return stepCountObservers.size();
     }
 
 //    private int count;
@@ -23,13 +23,12 @@ public class StepCounterObservable {
 //        notifyStepCountObserver(s);
 //    }
 
-    public void notifyStepCountObserver(int StepCount ) {
-        STEPCOUNTEvent event = new STEPCOUNTEvent(StepCount);
-//        StepCountObservers.forEach((StepCountObserver)->{StepCountObserver.updateStepCount(event.getStepCount());});
-        for(StepCountObserver ob : StepCountObservers){
-            ob.updateStepCount(event.getStepCount());
-        }
+    public void notifyStepCountObserver(STEPCOUNTEvent event ) {
+        stepCountObservers.forEach((StepCountObserver)->{StepCountObserver.updateStepCount(event);});
+
     }
+
+
 
 }
 
