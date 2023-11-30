@@ -13,18 +13,22 @@ class LinkTest {
 
     @BeforeAll
     public static void setFs(){
-        fs = TestFixtureInitializer.createFS();
+        fs = TestFixtureInitializer.CreateFS();
 
 
     }
     @Test
     public  void TestLinkCreationAndDeletion(){
-        Directory src = TestFixtureInitializer.src;
-        File java1 = TestFixtureInitializer.java1;
+        Directory src = fs.getRootDirs().get(0).getSubDirectories().get(0);
+        Directory test = fs.getRootDirs().get(0).getSubDirectories().get(1);
+        File java1 = src.getFiles().get(0);
+        File java2 = test.getFiles().get(0);
         Link J = new Link(src,"HelloWorld",4, LocalDateTime.now(),java1);
+        Link K = new Link(test,"TestHelloWorld",5, LocalDateTime.now(),java2);
         assertNotNull(J);
         System.out.println(J.name);
-//        CHecking if the link corrsponds to correct Target or not . 
+        System.out.println(J.isFile());
+//        Checking if the link corrsponds to correct Target or not .
         assertEquals(java1, J.getTarget());
 //        The size of the link will be 0.
         assertEquals(0, J.getSize());

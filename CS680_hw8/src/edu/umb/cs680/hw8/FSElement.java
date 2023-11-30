@@ -43,7 +43,8 @@ public abstract  class FSElement {
     }
 
     public abstract boolean isDirectory();
-    public  abstract void  PlaceHolder();
+    public abstract boolean isFile();
+    public  abstract void placeHolder();
 
 }
 

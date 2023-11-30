@@ -15,5 +15,10 @@ public class File extends FSElement {
     }
 
     @Override
-    public void PlaceHolder() {}
+    public boolean isFile() {
+        return true;
+    }
+
+    @Override
+    public void placeHolder() {}
 }

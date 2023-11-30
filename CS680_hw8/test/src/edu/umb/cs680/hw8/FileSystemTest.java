@@ -12,7 +12,7 @@ class FileSystemTest {
 
     @BeforeAll
     public static void setFs(){
-        fs  =TestFixtureInitializer.createFS();
+        fs  =TestFixtureInitializer.CreateFS();
     }
 
     @Test

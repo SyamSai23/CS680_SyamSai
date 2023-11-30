@@ -22,11 +22,16 @@ public class Link extends FSElement {
     }
 
     @Override
+    public boolean isFile() {
+        return false;
+    }
+
+    @Override
 //    Placeholder is ,checks
-    public void PlaceHolder() {
+    public void placeHolder() {
         if (target != null){
             System.out.println(this.name);
-            target.PlaceHolder();
+            target.placeHolder();
         }
         else {
             System.out.println(name);
@@ -34,7 +39,7 @@ public class Link extends FSElement {
     }
 
     public void removeLink(){
-//        Removes the particular Link when a remove method is called , BY not affecting the orginal File or Directory.
+//        Removes the particular Link when a remove method is called , BY not affecting the original File or Directory.
         if(parent !=null){
             parent.getChildren().remove(this);
 
