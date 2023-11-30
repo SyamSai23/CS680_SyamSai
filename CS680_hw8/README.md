@@ -1,0 +1,1 @@
+Implemented Symbolic links in addition to Files/Directories, using proxy Design Pattern .Here the Link will be having same properties that a FIle or a Directory has and acts as a proxy of a File or Directory. 
