@@ -3,7 +3,6 @@ package edu.umb.cs680.hw7;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,7 +12,7 @@ class FileSystemTest {
 
     @BeforeAll
     public static void setUpFS(){
-         fs= TestFixtureInitializer.createFS();
+         fs= TestFixtureInitializer.CreateFS();
     }
 
     @Test

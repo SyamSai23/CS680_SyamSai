@@ -4,11 +4,8 @@ import org.junit.jupiter.api.BeforeAll;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.LinkedList;
 
-import static edu.umb.cs680.hw7.TestFixtureInitializer.date2;
 import static org.junit.jupiter.api.Assertions.*;
 
 class FileTest {
@@ -16,7 +13,7 @@ class FileTest {
     private static FileSystem fs;
     @BeforeAll
     public static void setUpFS(){
-         fs = TestFixtureInitializer.createFS();
+         fs = TestFixtureInitializer.CreateFS();
 
     }
 
@@ -28,28 +25,32 @@ class FileTest {
 
     @Test
     public void FileEqualityJava1(){
-        File java1 = TestFixtureInitializer.java1;
-        String[] expected = {"src", "HelloWorld", "4", String.valueOf(date2)};
+        Directory src = fs.getRootDirs().get(0).getSubDirectories().get(0);
+        File java1 = src.getFiles().get(0);
+        String[] expected = {"src", "HelloWorld", "4", String.valueOf(LocalDateTime.of(2023,12,2,11,30))};
         assertArrayEquals(expected, FileToStringArray(java1));
     }
 
     @Test
     public void FileEqualityXml(){
-        File xml = TestFixtureInitializer.xml;
-        String[] expected = {"root", "xml", "3", String.valueOf(date2)};
+        Directory root = fs.getRootDirs().get(0);
+        File xml = root.getFiles().get(0);
+        String[] expected = {"root", "xml", "3", String.valueOf(LocalDateTime.of(2023,12,2,11,30))};
         assertArrayEquals(expected, FileToStringArray(xml));
     }
 
     @Test
     public void FileEqualityIvy(){
-        File ivy = TestFixtureInitializer.ivy;
-        String[] expected = {"root", "ivy", "4", String.valueOf(date2)};
+        Directory root = fs.getRootDirs().get(0);
+        File ivy = root.getFiles().get(1);
+        String[] expected = {"root", "ivy", "4", String.valueOf(LocalDateTime.of(2023,12,2,11,30))};
         assertArrayEquals(expected, FileToStringArray(ivy));
     }
 
     @Test
     public void TestIsDirectoryReturnsFalse(){
-        File java1 = TestFixtureInitializer.java1;
+        Directory src = fs.getRootDirs().get(0).getSubDirectories().get(0);
+        File java1 = src.getFiles().get(0);
         assertFalse(java1.isDirectory());
     }
 

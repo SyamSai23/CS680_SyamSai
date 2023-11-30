@@ -16,15 +16,15 @@ public class FileSystem {
         return instance;
     }
 
-    private final LinkedList<Directory> RootDir = new LinkedList<>();
+    private final LinkedList<Directory> rootDir = new LinkedList<>();
 
     public LinkedList<Directory> getRootDirs(){
-        return this.RootDir;
+        return this.rootDir;
 
     }
 
     public void appendRootDir(Directory root){
-        this.RootDir.add(root);
+        this.rootDir.add(root);
     }
 
 }
