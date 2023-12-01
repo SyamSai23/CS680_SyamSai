@@ -12,7 +12,7 @@ class MileageComparatorTest {
         ArrayList<Car> usedCars = TestFixture.getUsedCars();
         usedCars.sort(new MileageComparator());
        assertEquals("Accord", usedCars.get(0).getModel());
-       assertEquals("Creta", usedCars.get(1).getModel());
+       assertEquals("Sonataa", usedCars.get(2).getModel());
     }
 
 }

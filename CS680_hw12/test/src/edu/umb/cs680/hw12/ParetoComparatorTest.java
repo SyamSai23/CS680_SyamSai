@@ -16,7 +16,7 @@ class ParetoComparatorTest {
         }
         Collections.sort(usedCars, new ParetoComparator<Car>());
 //        The Domination Count for Model Tavera is 2, Both Accord & Innova Dominated tavera in terms of Price, Year & Mileage .
-        assertEquals(2,usedCars.get(3).getDominationCount());
+        assertEquals(8,usedCars.get(11).getDominationCount());
 
     }
 }

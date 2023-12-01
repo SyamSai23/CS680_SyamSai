@@ -15,8 +15,8 @@ class PriceComparatorTest {
         ArrayList<Car> usedCars = TestFixture.getUsedCars();
 
         usedCars.sort(new PriceComparator());
-        assertEquals("Accord", usedCars.get(0).getModel());
-        assertEquals("Innova", usedCars.get(1).getModel());
+        assertEquals("Passat", usedCars.get(0).getModel());
+        assertEquals("Optima", usedCars.get(2).getModel());
 
 
     }

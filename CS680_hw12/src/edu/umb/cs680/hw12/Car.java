@@ -9,7 +9,7 @@ public class Car {
     private final int mileage;
     private final int year;
     private final int  price;
-    private int  DominationCount;
+    private int dominationCount;
 
     public Car(String make, String model, int mileage, int year, int price){
         this.make= make;
@@ -17,9 +17,9 @@ public class Car {
         this.mileage =mileage;
         this.year = year;
         this.price =price;
-//        this.DominationCount = DominationCount;
+
     }
-//    create Getter Methods.
+//    create Getter Methods for all the variables
     public String getMake(){
         return make;
     }
@@ -35,57 +35,26 @@ public class Car {
     public int  getPrice(){
         return price;
     }
-    public int getDominationCount(){
-        return DominationCount;
-    }
 
-    ArrayList<Car> usedCars = new ArrayList<>();
     public void setDominationCount(ArrayList<Car> usedCars){
-        for(Car DC : usedCars){
-//            comparing models, If the models are different then compare the price , Year & mileage.
-            if(!DC.getModel().equals(this.model)){
-                if(DC.getPrice() <= this.getPrice() && DC.getYear() >= this.getYear() && DC.getMileage() <= this.getMileage()){
-                    this.DominationCount++;
+//        Initializing domination count for current car as 0 and Increment the count if the current car dominates car.
+        this.dominationCount = 0;
+        for(Car car : usedCars){
+            if(!car.equals(this)){
+//                Checking the two conditions I.e either all values are superior or at least one value is superior .
+                if(car.getPrice() <= this.getPrice() && car.getMileage() <= this.getMileage() && car.getYear() >= this.getYear()) {
+                    if(car.getPrice() < this.getPrice() || car.getMileage() < this.getMileage() || car.getYear() > this.getYear()) {
+                        this.dominationCount++;
+                    }
                 }
             }
+
         }
 
     }
 
-    public static void main(String[] args){
-        ArrayList<Car> usedCars = new ArrayList<Car>();
-        usedCars.add(new Car("Tayota","Innova",23,2010,12000));
-        usedCars.add(new Car("Honda","Accord",12,2020,10000));
-        usedCars.add(new Car("Hundai","Creta",18,2019,20000));
-        usedCars.add(new Car("Chavalite","Tavera",23,2009,15000));
-        for(Car DC: usedCars){
-            DC.setDominationCount(usedCars);
-            System.out.println(DC.getMake() + " : Domination Count : " + DC.getDominationCount());
-        }
-        usedCars.sort(new ParetoComparator<Car>());
-
-
-//        usedCars.sort(new PriceComparator());
-//        for (Car p : usedCars){
-//            System.out.println(p.model);
-//        }
-//
-//        System.out.println(" ");
-//
-//        usedCars.sort(new YearComparator());
-//        for(Car Y : usedCars){
-//            System.out.println(Y.model);
-//        }
-//
-//        System.out.println(" ");
-//
-//        usedCars.sort(new MileageComparator());
-//        for(Car M : usedCars){
-//            System.out.println(M.model);
-//        }
-//
-
+    public int getDominationCount(){
+        return dominationCount;
     }
-
 
 }

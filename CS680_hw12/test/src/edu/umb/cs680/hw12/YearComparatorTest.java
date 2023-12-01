@@ -11,7 +11,7 @@ class YearComparatorTest {
         ArrayList<Car> usedCars = TestFixture.getUsedCars();
         usedCars.sort(new YearComparator());
         assertEquals("Accord", usedCars.get(0).getModel());
-        assertEquals("Creta", usedCars.get(1).getModel());
+        assertEquals("model-y", usedCars.get(1).getModel());
     }
 
 }
