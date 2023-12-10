@@ -16,11 +16,7 @@ public class LocationSensorObservable {
     public  int CountLocationObservers(){
         return locationSensorObservers.size();
     }
-//    private String LocationName;
-//    public void notifyLocationObserver(){
-//        LOCATIONEvent L = new LOCATIONEvent(LocationName);
-//        notifyLocationObserver(L);
-//    }
+
 
     public void notifyLocationObserver(LOCATIONEvent event) {
         locationSensorObservers.forEach((LocationObserver)->{LocationObserver.updateLocationSensor(event);});

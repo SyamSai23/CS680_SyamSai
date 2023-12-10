@@ -32,8 +32,7 @@ public class TrackerAppTest {
 
         o.addStepCountObserver(ob5);
         l.addLocationObserver(ob5);
-// when the user un subscribe from one of the event , then the user will not get notification from any of the event
-//        in the TrackerApp
+
         assertEquals(5,o.CountStepCountObserver());
         assertEquals(5, l.CountLocationObservers());
 

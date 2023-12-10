@@ -17,11 +17,7 @@ public class StepCounterObservable {
         return stepCountObservers.size();
     }
 
-//    private int count;
-//    public void StepCountNotify(){
-//        STEPCOUNTEvent s = new STEPCOUNTEvent(count);
-//        notifyStepCountObserver(s);
-//    }
+
 
     public void notifyStepCountObserver(STEPCOUNTEvent event ) {
         stepCountObservers.forEach((StepCountObserver)->{StepCountObserver.updateStepCount(event);});
