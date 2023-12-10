@@ -11,8 +11,8 @@ class ParetoComparatorTest {
     @Test
     public void TestParetoComparision(){
         ArrayList<Car> usedCars = TestFixture.getUsedCars();
-        for(Car DC: usedCars){
-            DC.setDominationCount(usedCars);
+        for(Car car: usedCars){
+            car.setDominationCount(usedCars);
         }
         Collections.sort(usedCars, new ParetoComparator<Car>());
 //        The Domination Count for Model Tavera is 2, Both Accord & Innova Dominated tavera in terms of Price, Year & Mileage .
