@@ -31,21 +31,21 @@ class DirectoryTest {
 
     @Test
     public void VerifyDirectoryEqualityRoot(){
-        String[] expected = {null,"root", String.valueOf(0), String.valueOf(LocalDateTime.of(2023,12,1,4,15))};
+        String[] expected = {null,"repo", String.valueOf(0), String.valueOf(LocalDateTime.of(2023,12,1,4,15))};
         Directory actual = fs.getRootDirs().get(0);
         assertArrayEquals(expected,dirToStringArray(actual));
     }
 
     @Test
     public void verifyDirectoryEqualitysrc(){
-        String[] expecetd = {"root","src", String.valueOf(0), String.valueOf(LocalDateTime.of(2023,12,1,4,15))};
+        String[] expecetd = {"repo","src", String.valueOf(0), String.valueOf(LocalDateTime.of(2023,12,1,4,15))};
         Directory actual = fs.getRootDirs().get(0).getSubDirectories().get(0);
         assertArrayEquals(expecetd,dirToStringArray(actual));
     }
 
     @Test
     public void verifyDirectoryEqualitytest(){
-        String[] expecetd = {"root","test", String.valueOf(0), String.valueOf(LocalDateTime.of(2023,12,1,4,15))};
+        String[] expecetd = {"repo","test", String.valueOf(0), String.valueOf(LocalDateTime.of(2023,12,1,4,15))};
         Directory actual = fs.getRootDirs().get(0).getSubDirectories().get(1);
         assertArrayEquals(expecetd,dirToStringArray(actual));
     }
@@ -55,15 +55,15 @@ class DirectoryTest {
         for(FSElement fsElement : fs.getRootDirs().get(0).getChildren()){
             actual.add(fsElement.getName());
         }
-        String[] expected = {"src","test","xml","ivy"};
+        String[] expected = {"src","test","readme.md"};
         assertArrayEquals(expected,actual.toArray());
     }
 
     @Test
     void TestgetSubDirectories() {
-        Directory root = fs.getRootDirs().get(0);
+        Directory d1 = fs.getRootDirs().get(0);
         LinkedList<String> actual = new LinkedList<>();
-        for(FSElement fsElement: root.getSubDirectories()){
+        for(FSElement fsElement: d1.getSubDirectories()){
             actual.add(fsElement.getName());
         }
         String[] expected = {"src","test"};
@@ -80,45 +80,45 @@ class DirectoryTest {
 
     @Test
     void TestgetFiles() {
-        Directory src = fs.getRootDirs().get(0).getSubDirectories().get(0);
+        Directory d2 = fs.getRootDirs().get(0).getSubDirectories().get(0);
         LinkedList<String> actual = new LinkedList<>();
-        for(FSElement fsElement : src.getFiles()){
+        for(FSElement fsElement : d2.getFiles()){
             actual.add(fsElement.getName());
         }
-        String[] expected = {"HelloWorld"};
+        String[] expected = {"A.java","B.java"};
         assertArrayEquals(expected,actual.toArray());
     }
 
     @Test
     void TestappendChild() {
-        Directory src = fs.getRootDirs().get(0).getSubDirectories().get(0);
-        File java1 = src.getFiles().get(0);
-        assertTrue(src.getChildren().contains(java1));
+        Directory d2 = fs.getRootDirs().get(0).getSubDirectories().get(0);
+        File f2 = d2.getFiles().get(0);
+        assertTrue(d2.getChildren().contains(f2));
     }
 
     @Test
     void TestcountChildren() {
-        Directory root = fs.getRootDirs().get(0);
-        int expecetd = 4;
-        assertEquals(expecetd,root.getChildren().size());
+        Directory d1 = fs.getRootDirs().get(0);
+        int expecetd = 3;
+        assertEquals(expecetd,d1.getChildren().size());
     }
 
     @Test
     void TestesTotalSize() {
-        Directory root = fs.getRootDirs().get(0);
-        System.out.println(root.getTotalSize());
-        int expecetd = 16;
-        assertEquals(expecetd,root.getTotalSize());
+        Directory d1 = fs.getRootDirs().get(0);
+        System.out.println(d1.getTotalSize());
+        int expecetd = 24;
+        assertEquals(expecetd,d1.getTotalSize());
     }
 
 
     @Test
     void TestisDirectory() {
-        Directory root = fs.getRootDirs().get(0);
-        Directory src = root.getSubDirectories().get(0);
-        Directory test = root.getSubDirectories().get(1);
-        assertTrue(root.isDirectory());
-        assertTrue(src.isDirectory());
-        assertTrue(test.isDirectory());
+        Directory d1 = fs.getRootDirs().get(0);
+        Directory d2 = d1.getSubDirectories().get(0);
+        Directory d3 = d1.getSubDirectories().get(1);
+        assertTrue(d1.isDirectory());
+        assertTrue(d2.isDirectory());
+        assertTrue(d3.isDirectory());
     }
 }

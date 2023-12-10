@@ -26,9 +26,9 @@ class FileSystemTest {
     @Test
     public void TeatAppendRootDir(){
         fs = FileSystem.getFileSystem();
-        Directory root = new Directory(null,"Root",0, LocalDateTime.now());
-        fs.appendRootDir(root);
-        assertTrue(fs.getRootDirs().contains(root));
+        Directory d1 = new Directory(null,"repo",0, LocalDateTime.now());
+        fs.appendRootDir(d1);
+        assertTrue(fs.getRootDirs().contains(d1));
     }
 
 
