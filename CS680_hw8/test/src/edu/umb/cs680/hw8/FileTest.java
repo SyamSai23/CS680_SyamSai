@@ -22,18 +22,39 @@ class FileTest {
 
     @Test
     public void FileEqualityJava1(){
-        Directory src = fs.getRootDirs().get(0).getSubDirectories().get(0);
-        File java1 = src.getFiles().get(0);
-        String[] expected = {"src", "HelloWorld", "4", String.valueOf(LocalDateTime.of(2023,12,2,11,30))};
-        File actual = java1;
-        assertArrayEquals(expected, FileToStringArray(actual));
+        Directory d2 = fs.getRootDirs().get(0).getSubDirectories().get(0);
+        File f2 = d2.getFiles().get(0);
+        String[] expected = {"src", "A.java", "4", String.valueOf(LocalDateTime.of(2023,12,2,11,30))};
+        assertArrayEquals(expected, FileToStringArray(f2));
+    }
+
+    @Test
+    public void FileEqualityReadme(){
+        Directory d1 = fs.getRootDirs().get(0);
+        File f1 = d1.getFiles().get(0);
+        String[] expected = {"repo", "readme.md", "3", String.valueOf(LocalDateTime.of(2023,12,2,11,30))};
+        assertArrayEquals(expected, FileToStringArray(f1));
+    }
+
+    @Test
+    public void FileEqualityAJava(){
+        Directory d2 = fs.getRootDirs().get(1);
+        File f2 = d2.getFiles().get(0);
+        String[] expected = {"src", "A.java", "4", String.valueOf(LocalDateTime.of(2023,12,2,11,30))};
+        assertArrayEquals(expected, FileToStringArray(f2));
+    }
+
+    @Test
+    public void FileEqualityATestJava(){
+        Directory d4 = fs.getRootDirs().get(2).getSubDirectories().get(0);
+        File f3 = d4.getFiles().get(0);
+        String[] expected = {"src","ATest.java","5",String.valueOf(LocalDateTime.of(2023,12,2,11,30))};
     }
 
     @Test
     public void TestIsDirectoryReturnsFalse(){
-        Directory src = fs.getRootDirs().get(0).getSubDirectories().get(0);
-        File java1 = src.getFiles().get(0);
-        assertFalse(java1.isDirectory());
+        Directory d2 = fs.getRootDirs().get(0).getSubDirectories().get(0);
+        File f2 = d2.getFiles().get(0);
+        assertFalse(f2.isDirectory());
     }
-
 }

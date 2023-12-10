@@ -41,12 +41,20 @@ public class Directory extends FSElement {
         }
         return files;
     }
+
+    public LinkedList<Link> getLink(){
+        LinkedList<Link> links = new LinkedList<>();
+        for(FSElement Node : this.children){
+            if(!Node.isDirectory() && !Node.isFile()){
+                links.add((Link) Node);
+            }
+        }
+        return links;
+    }
     public  void appendChild(FSElement child){
         this.children.add(child);
         child.setParent(this);
     }
-
-
 
     public  int CountChildren(){
         return  children.size();

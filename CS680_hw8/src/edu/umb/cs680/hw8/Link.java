@@ -37,7 +37,6 @@ public class Link extends FSElement {
             System.out.println(name);
         }
     }
-
     public void removeLink(){
 //        Removes the particular Link when a remove method is called , BY not affecting the original File or Directory.
         if(parent !=null){
@@ -47,7 +46,6 @@ public class Link extends FSElement {
 
 
     }
-
     public FSElement getTarget(){
         return this.target;
     }
