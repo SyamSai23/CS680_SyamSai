@@ -28,14 +28,14 @@ class CosineTest {
         List<List<Double>> points = Car.Normalization(carValues);
         for(List<Double> row : points){
             for(Double values: row){
+                //         Checking if the all the values are in the range[0,1]
                 assertTrue(values >= 0.0 && values <=1.0);
             }
         }
 
-        System.out.println(Distance.matrix(points,new Cosine()));
 //        Checking if the expected matrix size and actual matrix are same
         assertEquals(1000, Distance.matrix(points).size());
-//         Checking if the all the values are in the range[0,1]
+
         List<List<Double>> cosineMatrix = Distance.matrix(points, new Cosine());
         System.out.println(cosineMatrix);
     }

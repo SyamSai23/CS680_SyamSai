@@ -32,8 +32,6 @@ class ManhattanTest {
                 assertTrue(values >= 0.0 && values <=1.0);
             }
         }
-
-//        System.out.println(Distance.matrix(points,new Manhattan()));
 //        Checking if the expected matrix size and actual matrix are same
         assertEquals(1000, Distance.matrix(points).size());
 //         Checking if the all the values are in the range[0,1]
