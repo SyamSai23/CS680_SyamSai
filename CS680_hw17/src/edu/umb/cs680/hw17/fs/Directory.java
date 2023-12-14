@@ -22,9 +22,9 @@ public class Directory extends FSElement {
     @Override
     public void accept(FSVisitor v) {
         v.visit(this);
-        for(FSElement e : children){
+        children.forEach(e -> {
             e.accept(v);
-        }
+        });
     }
     public LinkedList<FSElement> getChildren(){
         return this.children;
@@ -33,11 +33,11 @@ public class Directory extends FSElement {
         LinkedList<Directory> subDir = new LinkedList<Directory>();
 //        Here we have used Enhanced ForLoop, Get all the children from the
 //        FSElement and check whether node is directory or not .
-        for(FSElement Node : this.children){
-            if(Node.isDirectory()){
-                subDir.add((Directory) Node);
+        children.forEach(NOde -> {
+            if(NOde.isDirectory()){
+                subDir.add((Directory) NOde);
             }
-        }
+        });
         return subDir;
     }
 
@@ -45,22 +45,21 @@ public class Directory extends FSElement {
     public  LinkedList<File> getFiles()
     {
         LinkedList<File> files = new LinkedList<File>();
-        for(FSElement Node :this.children){
-            if(Node.isFile()){
-                files.add((File) Node);
+        children.forEach(N0de -> {
+            if(N0de.isFile()){
+                files.add( (File) N0de);
             }
-        }
-
+        });
         return files;
     }
 
     public LinkedList<Link> getLink(){
         LinkedList<Link>  links = new LinkedList<>();
-        for(FSElement Node: this.children){
-            if(!Node.isDirectory() && !Node.isFile()){
-                links.add((Link) Node);
+        children.forEach(Node -> {
+            if(Node.isLink()){
+                links.add( (Link) Node);
             }
-        }
+        });
         return links;
     }
     public  void appendChild(FSElement child){
@@ -77,27 +76,25 @@ public class Directory extends FSElement {
 
     public LinkedList<Directory> getSubDirectories(Comparator<FSElement> comparator){
         LinkedList<Directory> subDir = new LinkedList<>();
-        for(FSElement Node : this.children){
+        children.forEach(Node ->{
             if(Node.isDirectory()){
                 subDir.add((Directory) Node);
             }
-        }
+        });
         Collections.sort(subDir, comparator);
         return subDir;
     }
 
     public LinkedList<File> getFiles(Comparator<FSElement> comparator){
         LinkedList<File> files = new LinkedList<>();
-        for(FSElement Node :this.children){
+        children.forEach(Node -> {
             if(Node.isFile()){
                 files.add((File) Node);
             }
-        }
+        });
         Collections.sort(files, comparator);
         return files;
     }
-
-
 
     public  int CountChildren(){
         return  children.size();
@@ -120,6 +117,7 @@ public class Directory extends FSElement {
             }
 
         }
+
         return totalSize;
     }
 
