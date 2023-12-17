@@ -7,8 +7,6 @@ import java.util.LinkedList;
 
 public class FileCrawling implements FSCommand{
 
-
-
     @Override
     public LinkedList<File> execute(Directory rootDir) {
         FileCrawlingVisitor visitor = new FileCrawlingVisitor();

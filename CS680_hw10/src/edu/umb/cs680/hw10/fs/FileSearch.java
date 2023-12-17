@@ -6,7 +6,7 @@ import java.util.LinkedList;
 
 public class FileSearch implements FSCommand{
 
-    private  String fileName;
+    private final String fileName;
 
     public FileSearch(String fileName){
         this.fileName = fileName;
